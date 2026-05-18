@@ -22,7 +22,7 @@ export default function Pipeline() {
 
         <div className="md:w-2/3 relative">
           {/* Central Line */}
-          <div className="absolute left-0 top-0 bottom-0 w-[1px] bg-line-subtle hidden md:block" />
+          <div className="absolute left-4 md:left-0 top-0 bottom-0 w-[1px] bg-line-subtle" />
 
           <div className="flex flex-col gap-16">
             {resumeData.experience.map((exp, index) => (
@@ -31,10 +31,10 @@ export default function Pipeline() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className="relative md:pl-12"
+                className="relative pl-12"
               >
                 {/* Node */}
-                <div className="absolute left-[-4px] top-2 w-2 h-2 rounded-full bg-accent-glow hidden md:block border-4 border-bg-void shadow-[0_0_15px_rgba(229,169,61,0.5)]" />
+                <div className="absolute left-[-4px] md:left-[-4px] top-2 w-2 h-2 rounded-full bg-accent-glow border-4 border-bg-void shadow-[0_0_15px_rgba(229,169,61,0.5)]" />
                 
                 <span className="font-mono text-[10px] text-accent-primary tracking-[0.3em] uppercase mb-2 block">
                   {exp.period}

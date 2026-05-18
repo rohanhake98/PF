@@ -2,18 +2,45 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Pipeline from "@/components/sections/Pipeline";
+import Datapods from "@/components/sections/Datapods";
+import Contact from "@/components/sections/Contact";
+import LiveAIPlayground from "@/components/ui/LiveAIPlayground";
+import Scene from "@/components/3d/Scene";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate initial system check for the "Luxury Tech" vibe
-    const timer = setTimeout(() => setIsLoading(false), 2000);
+    // Simulate initial system check
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      
+      // Initialize Scroll Animations after loading
+      ScrollTrigger.create({
+        trigger: "main",
+        start: "top top",
+        end: "bottom bottom",
+        onUpdate: (self) => {
+          // You could pass this progress to a 3D store or use global events
+          // For now, we'll let the NeuralCore use its own continuous animation
+          // but we could sync camera or specific rotations here.
+        }
+      });
+    }, 2000);
+    
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <main className="relative min-h-screen bg-bg-void text-text-primary overflow-hidden">
+      {/* Noise Overlay */}
+      <div className="fixed inset-0 z-50 pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
+      
       <AnimatePresence>
         {isLoading && (
           <motion.div
@@ -41,10 +68,9 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* 3D Canvas Placeholder */}
+      {/* 3D Canvas Layer */}
       <div className="fixed inset-0 z-0 pointer-events-none">
-        {/* R3F Canvas will be injected here in Phase 4 */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(224,90,51,0.05),transparent_70%)]" />
+        <Scene />
       </div>
 
       {/* UI Content Layer */}
@@ -76,6 +102,8 @@ export default function Home() {
             </p>
           </motion.div>
 
+          <LiveAIPlayground />
+
           {/* CTA / Scroll Indicator */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -89,6 +117,10 @@ export default function Home() {
             </span>
           </motion.div>
         </section>
+
+        <Pipeline />
+        <Datapods />
+        <Contact />
 
         {/* Subsequent sections will be built in the next phases */}
       </div>
