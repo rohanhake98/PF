@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+:root {
+  --bg-void: #0A0A0B;
+  --surface-glass: rgba(22, 22, 24, 0.6);
+  --accent-primary: #E05A33;
+  --accent-glow: #E5A93D;
+  --text-primary: #EDEDF0;
+  --text-muted: #8A8A93;
+  --line-subtle: rgba(255, 255, 255, 0.08);
+}
+
+@theme {
+  --color-bg-void: var(--bg-void);
+  --color-surface-glass: var(--surface-glass);
+  --color-accent-primary: var(--accent-primary);
+  --color-accent-glow: var(--accent-glow);
+  --color-text-primary: var(--text-primary);
+  --color-text-muted: var(--text-muted);
+  --color-line-subtle: var(--line-subtle);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-void);
+  color: var(--text-primary);
+  font-family: 'Inter', sans-serif; /* Fallback until fonts are linked */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--accent-primary);
+  color: var(--bg-void);
+}
+
+/* Custom Scrollbar for Luxury Tech vibe */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-void);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line-subtle);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-glow);
+}
+
+.glass-panel {
+  background: var(--surface-glass);
+  backdrop-filter: blur(24px);
+  border: 1px solid var(--line-subtle);
+}
+
+.text-gradient-amber {
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-glow) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
