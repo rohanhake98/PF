@@ -70,6 +70,20 @@ export default function LiveAIPlayground() {
           </div>
         </div>
 
+        {/* Quick Action Chips */}
+        <div className="px-4 py-2 flex gap-2 overflow-x-auto border-b border-line-subtle bg-bg-void/10 scrollbar-hide">
+          {["Stack", "Experience", "Projects"].map((label) => (
+            <button
+              key={label}
+              type="button"
+              onClick={() => setQuery(`Tell me about your ${label.toLowerCase()}`)}
+              className="px-2 py-0.5 rounded-[2px] border border-line-subtle text-[8px] mono-all-caps text-text-muted hover:border-accent-glow hover:text-accent-glow transition-all whitespace-nowrap"
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
         {/* Response Area */}
         <div 
           ref={scrollRef}

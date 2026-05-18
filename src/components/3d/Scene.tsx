@@ -32,7 +32,6 @@ export default function Scene() {
 
       <Suspense fallback={null}>
         <NeuralCore />
-        <Environment preset="city" />
         <ContactShadows
           position={[0, -2.5, 0]}
           opacity={0.4}

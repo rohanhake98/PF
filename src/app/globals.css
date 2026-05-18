@@ -2,12 +2,13 @@
 
 :root {
   --bg-void: #0A0A0B;
-  --surface-glass: rgba(22, 22, 24, 0.6);
+  --surface-glass: rgba(18, 18, 20, 0.7);
   --accent-primary: #E05A33;
   --accent-glow: #E5A93D;
   --text-primary: #EDEDF0;
   --text-muted: #8A8A93;
-  --line-subtle: rgba(255, 255, 255, 0.08);
+  --line-subtle: rgba(255, 255, 255, 0.05);
+  --grid-line: rgba(255, 255, 255, 0.03);
 }
 
 @theme {
@@ -18,54 +19,97 @@
   --color-text-primary: var(--text-primary);
   --color-text-muted: var(--text-muted);
   --color-line-subtle: var(--line-subtle);
+  
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-space);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@layer base {
+  * {
+    @apply border-line-subtle box-border;
+  }
+  
+  body {
+    @apply bg-bg-void text-text-primary antialiased overflow-x-hidden;
+    font-feature-settings: "ss01", "ss02", "cv01", "cv02";
+  }
 }
 
-body {
-  background-color: var(--bg-void);
-  color: var(--text-primary);
-  font-family: 'Inter', sans-serif; /* Fallback until fonts are linked */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
+@layer components {
+  .section-container {
+    @apply relative z-20 max-w-7xl mx-auto px-6 md:px-12 py-32 w-full;
+  }
+
+  .content-shield {
+    @apply absolute inset-0 -z-10 bg-bg-void/40 backdrop-blur-xl transition-all duration-700;
+  }
+  
+  .card-grid {
+    @apply grid grid-cols-1 md:grid-cols-2 gap-8 w-full;
+  }
+
+  .glass-panel {
+    @apply bg-surface-glass border border-line-subtle shadow-2xl;
+    backdrop-filter: blur(24px);
+    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.02) inset;
+  }
+
+  .text-gradient-amber {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-text-primary via-text-primary to-accent-glow;
+  }
+
+  .industrial-grid {
+    background-image: 
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .scanline {
+    width: 100%;
+    height: 100px;
+    z-index: 100;
+    background: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(255, 255, 255, 0.02) 50%,
+      rgba(0, 0, 0, 0) 100%
+    );
+    opacity: 0.1;
+    position: absolute;
+    bottom: 100%;
+    animation: scanline 10s linear infinite;
+  }
 }
 
-::selection {
-  background: var(--accent-primary);
-  color: var(--bg-void);
+@keyframes scanline {
+  0% { bottom: 100%; }
+  100% { bottom: -100px; }
 }
 
-/* Custom Scrollbar for Luxury Tech vibe */
+/* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 4px;
+  width: 2px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-void);
+  @apply bg-bg-void;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--line-subtle);
-  border-radius: 2px;
+  @apply bg-line-subtle;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--accent-glow);
+  @apply bg-accent-glow/50;
 }
 
-.glass-panel {
-  background: var(--surface-glass);
-  backdrop-filter: blur(24px);
-  border: 1px solid var(--line-subtle);
+/* Typography Overrides */
+h1, h2, h3, h4 {
+  @apply font-display tracking-tighter uppercase;
 }
 
-.text-gradient-amber {
-  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent-glow) 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.mono-all-caps {
+  @apply font-mono text-[10px] uppercase tracking-[0.3em] text-text-muted;
 }

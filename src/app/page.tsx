@@ -7,6 +7,7 @@ import Datapods from "@/components/sections/Datapods";
 import Contact from "@/components/sections/Contact";
 import LiveAIPlayground from "@/components/ui/LiveAIPlayground";
 import Scene from "@/components/3d/Scene";
+import FloatingCTA from "@/components/ui/FloatingCTA";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
@@ -26,9 +27,7 @@ export default function Home() {
         start: "top top",
         end: "bottom bottom",
         onUpdate: (self) => {
-          // You could pass this progress to a 3D store or use global events
-          // For now, we'll let the NeuralCore use its own continuous animation
-          // but we could sync camera or specific rotations here.
+          // Progress-based logic can be added here
         }
       });
     }, 2000);
@@ -37,7 +36,11 @@ export default function Home() {
   }, []);
 
   return (
-    <main className="relative min-h-screen bg-bg-void text-text-primary overflow-hidden">
+    <main className="relative min-h-screen bg-bg-void text-text-primary overflow-hidden font-sans">
+      {/* Background Layers */}
+      <div className="fixed inset-0 z-0 industrial-grid opacity-20 pointer-events-none" />
+      <div className="scanline pointer-events-none" />
+      
       {/* Noise Overlay */}
       <div className="fixed inset-0 z-50 pointer-events-none opacity-[0.03] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
       
@@ -76,10 +79,10 @@ export default function Home() {
       {/* UI Content Layer */}
       <div className="relative z-10">
         <nav className="p-8 flex justify-between items-center mix-blend-difference">
-          <div className="font-mono text-xs tracking-tighter uppercase text-text-muted">
+          <div className="mono-all-caps">
             [ Rohan_Hake / 2026 ]
           </div>
-          <div className="flex gap-8 font-mono text-[10px] tracking-[0.2em] uppercase">
+          <div className="flex gap-8 mono-all-caps">
             <a href="#about" className="hover:text-accent-glow transition-colors">Architecture</a>
             <a href="#projects" className="hover:text-accent-glow transition-colors">Data_Pods</a>
             <a href="#contact" className="hover:text-accent-glow transition-colors">Terminal</a>
@@ -92,13 +95,13 @@ export default function Home() {
             animate={{ opacity: isLoading ? 0 : 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h1 className="text-6xl md:text-8xl font-black tracking-tighter mb-4 text-gradient-amber">
+            <h1 className="text-7xl md:text-9xl font-black mb-4 text-gradient-amber">
               SYNAPSE
             </h1>
-            <p className="max-w-2xl mx-auto font-mono text-xs md:text-sm tracking-widest text-text-muted uppercase leading-relaxed">
+            <p className="max-w-2xl mx-auto mono-all-caps tracking-widest leading-relaxed">
               Full Stack MERN Developer & AI Engineer
               <br />
-              <span className="text-line-subtle">Building the future of predictive systems and intelligent UIs.</span>
+              <span className="text-line-subtle normal-case tracking-normal">Building the future of predictive systems and intelligent UIs.</span>
             </p>
           </motion.div>
 
@@ -122,7 +125,7 @@ export default function Home() {
         <Datapods />
         <Contact />
 
-        {/* Subsequent sections will be built in the next phases */}
+        <FloatingCTA />
       </div>
     </main>
   );
