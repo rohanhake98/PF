@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Download, ExternalLink, GitBranch, Mail } from "lucide-react";
+import { ThemeToggle } from "./ThemeToggle";
 
 export default function FloatingCTA() {
   return (
@@ -37,6 +38,8 @@ export default function FloatingCTA() {
           <a href="https://github.com/rohanhake98" target="_blank" className="text-text-muted hover:text-text-primary transition-colors">
             <GitBranch className="w-4 h-4" />
           </a>
+          <div className="w-px h-4 bg-line-subtle mx-1"></div>
+          <ThemeToggle />
         </div>
       </div>
     </motion.div>

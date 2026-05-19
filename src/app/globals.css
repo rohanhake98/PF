@@ -1,6 +1,17 @@
 @import "tailwindcss";
 
 :root {
+  --bg-void: #f8f9fa;
+  --surface-glass: rgba(255, 255, 255, 0.7);
+  --accent-primary: #d04a22;
+  --accent-glow: #c58a1d;
+  --text-primary: #111113;
+  --text-muted: #666670;
+  --line-subtle: rgba(0, 0, 0, 0.08);
+  --grid-line: rgba(0, 0, 0, 0.04);
+}
+
+.dark {
   --bg-void: #0A0A0B;
   --surface-glass: rgba(18, 18, 20, 0.7);
   --accent-primary: #E05A33;
